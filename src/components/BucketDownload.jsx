@@ -7,7 +7,7 @@ import AWS from 'aws-sdk';
 const accessKeyId = process.env.REACT_APP_AWS_ACCESS_KEY_ID;
 const secretAccessKey = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY;
 const region = process.env.REACT_APP_AWS_REGION;
-const bucket = process.env.REACT_APP_S3_BUCKET_NAME;
+const bucket = process.env.REACT_APP_S3_DOWNLOAD_BUCKET_NAME;
 
 AWS.config.update({
   region: region,
@@ -56,14 +56,35 @@ const BucketDownload = () => {
     const url = s3.getSignedUrl('getObject', params);
     window.location.href = url;
   };
+const deleteObject = async (key) => {
+  const deleteObject = async (key) => {
+
+    const s3 = new AWS.S3({
+      accessKeyId,
+      secretAccessKey,
+      region
+    });
+  
+    const params = {
+      Bucket: bucket,
+      Key: key
+    };
+  
+  }
+await s3.deleteObject(params).promise();
+s3.deleteObject(params).promise()
+  .then(() => {
+    // refresh state
+  });
+}
 
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-900">
+    <div className="flex flex-col items-center justify-center bg-pink-900">
       <h1 className='text-4xl font-bold tracking-tight text-white sm:text-6xl py-10'>Files Uploaded:</h1>
       <ul role="list" className="grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-3 xl:gap-x-8">
         {objects.map((object) => (
           <li key={object.ETag} className="overflow-hidden rounded-xl border border-gray-200">
-            <div className="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-900 p-6">
+            <div className="flex items-center gap-x-4 border-b border-gray-900/5 bg-pink-900 p-6">
               <div className="text-sm font-medium leading-6 text-gray-50">{object.Key}</div>
               <Menu as="div" className="relative ml-auto">
                 <Menu.Button className="-m-2.5 block p-2.5 text-gray-50 hover:text-gray-100">

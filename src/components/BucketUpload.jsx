@@ -4,7 +4,8 @@ import AWS from 'aws-sdk';
 const accessKeyId = process.env.REACT_APP_AWS_ACCESS_KEY_ID;
 const secretAccessKey = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY;
 const region = process.env.REACT_APP_AWS_REGION;
-const bucket = process.env.REACT_APP_S3_BUCKET_NAME;
+const bucket = process.env.REACT_APP_S3_UPLOAD_BUCKET_NAME;
+
 
 AWS.config.update({
   region: region,
@@ -26,9 +27,10 @@ const BucketUpload = () => {
   };
 
   const handleUpload = () => {
+    const filePrefix = '/'; // Define your prefix here
     const params = {
       Bucket: bucket,
-      Key: file.name,
+      Key: `${filePrefix}${file.name}`, // Prepend the prefix to the file name
       Body: file
     };
 
@@ -43,7 +45,7 @@ const BucketUpload = () => {
     });
   };
   return (
-    <div className="flex flex-col items-center justify-center  bg-gray-900">
+    <div className="flex flex-col items-center justify-center  bg-pink-900">
       <h1 className='text-4xl font-bold tracking-tight text-white sm:text-6xl py-10'>Upload Files:</h1>
       {success && <div className="bg-green-500 text-white p-4 rounded mb-4">Upload Successful</div>}
       {error && <div className="bg-red-500 text-white p-4 rounded mb-4">Upload Failed: {error}</div>}
