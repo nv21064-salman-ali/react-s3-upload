@@ -27,7 +27,7 @@ const BucketUpload = () => {
   };
 
   const handleUpload = () => {
-    const filePrefix = '/'; // Define your prefix here
+    const filePrefix = 'drop/'; // Define your prefix here
     const params = {
       Bucket: bucket,
       Key: `${filePrefix}${file.name}`, // Prepend the prefix to the file name
