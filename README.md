@@ -2,6 +2,66 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Add a New Folder Called **.env**
+
+<img width="293" alt="Screenshot 2024-04-30 at 8 09 07 PM" src="https://github.com/nv21064-salman-ali/react-s3-upload/assets/118216333/cd4e41c9-a472-4347-a8f7-c2c2c581d4b5">
+
+Add this code in **.env** File. (*Disclaimer, never share your access and secret access key with anyone*)
+```
+REACT_APP_AWS_ACCESS_KEY_ID="YOUR ACCESS KEY HERE"
+REACT_APP_AWS_SECRET_ACCESS_KEY="YOUR SECRET ACCESS KEY HERE"
+REACT_APP_AWS_REGION="us-east-1"
+REACT_APP_S3_UPLOAD_BUCKET_NAME= "YOUR BUCKET NAME INPUT"
+REACT_APP_S3_DOWNLOAD_BUCKET_NAME="YOUR BUCKET NAME OUTPUT"
+```
+INPUT BUCKET, Permission TAB, **CORS** section: 
+```
+[
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "GET",
+            "PUT",
+            "POST",
+            "DELETE"
+        ],
+        "AllowedOrigins": [
+            "https://EXAMPLE.COM,
+            "https://EXAMPLE.COM"
+        ],
+        "ExposeHeaders": [
+            "ETag"
+        ]
+    }
+]
+```
+OUTPUT BUCKET, Permission TAB, **CORS** section: 
+```
+[
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "GET",
+            "PUT",
+            "POST",
+            "DELETE"
+        ],
+        "AllowedOrigins": [
+              "https://EXAMPLE.COM,
+              "https://EXAMPLE.COM"
+        ],
+        "ExposeHeaders": [
+            "ETag"
+        ]
+    }
+]
+```
+
+
 ## Available Scripts
 
 In the project directory, you can run:
